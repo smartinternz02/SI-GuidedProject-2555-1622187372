@@ -1,0 +1,255 @@
+﻿<process name="currency link" version="1.0" bpversion="6.10.1.35171" narrative="" byrefcollection="true" preferredid="083b0e4b-4af9-40cc-ae44-1f7b650ae2b9" published="true">
+  <view>
+    <camerax>0</camerax>
+    <cameray>-13</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <stage stageid="e1ec7ab3-f862-4f3b-985c-04c31eb5b6d1" name="Start" type="Start">
+    <display x="45" y="-240" />
+    <onsuccess>f75732aa-6271-4ee1-b622-967b2ea6372f</onsuccess>
+  </stage>
+  <stage stageid="31da296d-5783-4c8d-938e-e57278df2d46" name="End" type="End">
+    <display x="-510" y="225" />
+  </stage>
+  <stage stageid="aa0b0f01-da4d-4adc-8d6a-be2d52eaebe5" name="Stage1" type="ProcessInfo">
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="f75732aa-6271-4ee1-b622-967b2ea6372f" name="MS Excel VBO::Create Instance" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="45" y="-150" />
+    <inputs>
+      <input type="flag" name="Enable Events" friendlyname="Enable Events" narrative="Flag to indicate that events should be enabled / disabled on the attached instance - defaulted to True" expr="" />
+    </inputs>
+    <outputs>
+      <output type="number" name="handle" friendlyname="handle" narrative="An integer which can be used to identify the created instance in subsequent actions" stage="handle" />
+    </outputs>
+    <onsuccess>6dc4eaf9-35d5-4ad9-9b4a-52a7ff5a3dfb</onsuccess>
+    <resource object="MS Excel VBO" action="Create Instance" />
+  </stage>
+  <stage stageid="143c25e5-54a2-4c04-91cf-078b4d0d24f3" name="handle" type="Data">
+    <display x="-600" y="-255" />
+    <datatype>number</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="6dc4eaf9-35d5-4ad9-9b4a-52a7ff5a3dfb" name="MS Excel VBO::Open Workbook" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="45" y="-90" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the required workbook should be opened. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="File name" friendlyname="File name" narrative="The path and name of the file which should be opened." expr="&quot;C:\Users\shailaja\Desktop\currency converter data.xlsx&quot;" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name used by Excel to identify the workbook - usually this is the file name (without the path)." stage="Workbook Name" />
+    </outputs>
+    <onsuccess>30df65c5-47f4-4b04-96ac-5cb8de99648f</onsuccess>
+    <resource object="MS Excel VBO" action="Open Workbook" />
+  </stage>
+  <stage stageid="fca10f45-5376-41eb-8e6d-f064c0f56853" name="Workbook Name" type="Data">
+    <display x="-525" y="-255" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="30df65c5-47f4-4b04-96ac-5cb8de99648f" name="MS Excel VBO::Get Worksheet As Collection" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="45" y="-30" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the worksheet which should be retrieved resides. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name of the workbook which contains the sheet required. The default empty text indicates the currently active workbook on the specified instance." expr="[Workbook Name]" />
+      <input type="text" name="Worksheet Name" friendlyname="Worksheet Name" narrative="The name of the worksheet within the specified workbook which should be written to a collection. The default empty text indicates the currently active worksheet within the specified workbook." expr="&quot;Sheet1&quot;" />
+      <input type="text" name="Fetch Data With Method" friendlyname="Fetch Data With Method" narrative="The method used to fetch data from cells in the worksheet. Options include Text, Value, and Value2. The default indicates Value will be used." expr="" />
+    </inputs>
+    <outputs>
+      <output type="collection" name="Data" friendlyname="Data" narrative="The collection containing the data from the specified worksheet - the column IDs will be gleaned from the first row on the sheet being retrieved." stage="input" />
+    </outputs>
+    <onsuccess>6c911928-01bc-4671-b443-6bdc4ff03ae6</onsuccess>
+    <resource object="MS Excel VBO" action="Get Worksheet As Collection" />
+  </stage>
+  <stage stageid="d51f72b6-f2e4-43ef-bf50-5129d7b1fbb4" name="input" type="Collection">
+    <display x="-450" y="-255" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="6c911928-01bc-4671-b443-6bdc4ff03ae6" name="currency converter::launch" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="300" y="-240" />
+    <onsuccess>379540ef-7afb-4a0b-8b88-34ffa0062d49</onsuccess>
+    <resource object="currency converter" action="launch" />
+  </stage>
+  <stage stageid="379540ef-7afb-4a0b-8b88-34ffa0062d49" name="Loop Start1" type="LoopStart">
+    <loginhibit onsuccess="true" />
+    <display x="300" y="-165" />
+    <onsuccess>4f87705d-4989-4c66-a7a5-a6a05dfed9e0</onsuccess>
+    <groupid>82687807-ca08-433e-8515-0fb03160265c</groupid>
+    <looptype>ForEach</looptype>
+    <loopdata>input</loopdata>
+  </stage>
+  <stage stageid="8b6049ec-e4e7-43ef-8aa7-1f77e0af78bf" name="Loop End1" type="LoopEnd">
+    <loginhibit onsuccess="true" />
+    <display x="300" y="225" />
+    <onsuccess>9dca2d5d-2959-414d-9204-c5fb1eb8b543</onsuccess>
+    <groupid>82687807-ca08-433e-8515-0fb03160265c</groupid>
+  </stage>
+  <stage stageid="4f87705d-4989-4c66-a7a5-a6a05dfed9e0" name="currency converter::amount" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="300" y="-90" />
+    <inputs>
+      <input type="number" name="amount" friendlyname="amount" expr="[input.amount]" />
+    </inputs>
+    <onsuccess>597ca79b-f6ff-4da8-ab30-c98d584a7417</onsuccess>
+    <resource object="currency converter" action="amount" />
+  </stage>
+  <stage stageid="597ca79b-f6ff-4da8-ab30-c98d584a7417" name="currency converter::from" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="300" y="-30" />
+    <inputs>
+      <input type="text" name="from" friendlyname="from" expr="[input.from]" />
+    </inputs>
+    <onsuccess>1637fcac-e235-456b-afc3-8eeb0d3d3302</onsuccess>
+    <resource object="currency converter" action="from" />
+  </stage>
+  <stage stageid="1637fcac-e235-456b-afc3-8eeb0d3d3302" name="currency converter::to" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="300" y="30" />
+    <inputs>
+      <input type="text" name="to" friendlyname="to" expr="[to]" />
+    </inputs>
+    <onsuccess>77ee9a1b-d08b-4bd1-89a3-467b07aa2d3b</onsuccess>
+    <resource object="currency converter" action="to" />
+  </stage>
+  <stage stageid="256a9082-0b2b-4dfb-9b1b-7154b960f773" name="to" type="Data">
+    <display x="360" y="30" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">INR</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="77ee9a1b-d08b-4bd1-89a3-467b07aa2d3b" name="currency converter::button" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="300" y="105" />
+    <onsuccess>01173686-50e9-47db-b332-21490dff058d</onsuccess>
+    <resource object="currency converter" action="button" />
+  </stage>
+  <stage stageid="01173686-50e9-47db-b332-21490dff058d" name="currency converter:result" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="300" y="165" />
+    <outputs>
+      <output type="text" name="result" friendlyname="result" stage="input.INR" />
+    </outputs>
+    <onsuccess>8b6049ec-e4e7-43ef-8aa7-1f77e0af78bf</onsuccess>
+    <resource object="currency converter" action="result" />
+  </stage>
+  <stage stageid="9dca2d5d-2959-414d-9204-c5fb1eb8b543" name="MS Excel VBO::Write Collection" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="195" y="225" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the specified collection should be written. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name of the workbook within which the data should be written. The default empty value indicates the current workbook within the specified instance." expr="[Workbook Name]" />
+      <input type="collection" name="Collection" friendlyname="Collection" narrative="The collection containing the data which should be written to the worksheet." expr="[input]" />
+      <input type="text" name="Worksheet Name" friendlyname="Worksheet Name" narrative="The name of the worksheet on which the given data should be written. The default empty value indicates the current sheet within the specified workbook." expr="&quot;Sheet1&quot;" />
+      <input type="text" name="Cell Reference" friendlyname="Cell Reference" narrative="The reference at which the collection should be written." expr="&quot;A2&quot;" />
+      <input type="flag" name="Include Column Names" friendlyname="Include Column Names" narrative="True to indicate that the column names from the collection should be written out as the first row; False to ignore the column names and just write out the data." expr="" />
+    </inputs>
+    <onsuccess>0d41958e-d1a4-4bd5-b4c5-d65b9ab27f71</onsuccess>
+    <resource object="MS Excel VBO" action="Write Collection" />
+  </stage>
+  <stage stageid="0d41958e-d1a4-4bd5-b4c5-d65b9ab27f71" name="MS Excel VBO::Close Instance" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="90" y="225" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance to be closed. Zero indicates the currently active instance." expr="[handle]" />
+      <input type="flag" name="Save Changes" friendlyname="Save Changes" narrative="True to save the changes to the open workbooks on the instance, False to discard any changes. Default is False." expr="True" />
+    </inputs>
+    <onsuccess>2421ddae-61b1-4baa-adab-bd9b8e381a23</onsuccess>
+    <resource object="MS Excel VBO" action="Close Instance" />
+  </stage>
+  <stage stageid="2421ddae-61b1-4baa-adab-bd9b8e381a23" name="currency converter::terminate" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="0" y="225" />
+    <onsuccess>f9c6f175-c631-4908-bf7c-ffae83dd4f89</onsuccess>
+    <resource object="currency converter" action="terminate" />
+  </stage>
+  <stage stageid="d8a45b4a-7caa-4af1-8ad5-dbe18b17497d" name="username" type="Data">
+    <loginhibit onsuccess="true" />
+    <display x="-105" y="135" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">shailajareddyrajula@gmail.com</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="1bfd1ff5-e93c-478a-bcd5-58bb7bc10c2d" name="password" type="Data">
+    <loginhibit onsuccess="true" />
+    <display x="-210" y="135" />
+    <datatype>password</datatype>
+    <initialvalueenc>120,76,76,9,94,3,71,85,118,76</initialvalueenc>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="f9c6f175-c631-4908-bf7c-ffae83dd4f89" name="Email - POP3/SMTP::Configure" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="-90" y="225" />
+    <inputs>
+      <input type="text" name="Username" friendlyname="Username" narrative="The POP3 and SMTP Username" expr="[username]" />
+      <input type="password" name="Password" friendlyname="Password" narrative="The POP3 and SMTP Password" expr="[password]" />
+      <input type="text" name="POP3 Server" friendlyname="POP3 Server" narrative="The POP3 Server address e.g. pop.domain.com" expr="&quot;pop.gmail.com&quot;" />
+      <input type="text" name="SMTP Server" friendlyname="SMTP Server" narrative="The SMTP Server address e.g. smtp.domain.com" expr="&quot;smtp.gmail.com&quot;" />
+      <input type="number" name="POP3 Port" friendlyname="POP3 Port" narrative="The POP3 Port, e.g. 110 or 995" expr="999" />
+      <input type="number" name="SMTP Port" friendlyname="SMTP Port" narrative="The SMTP Port, e.g 25 or 465" expr="587" />
+      <input type="flag" name="POP3 UseSSL" friendlyname="POP3 UseSSL" narrative="Whether to use SSL for POP3" expr="True" />
+      <input type="flag" name="SMTP UseSSL" friendlyname="SMTP UseSSL" narrative="Whether to use SSL for SMTP" expr="True" />
+    </inputs>
+    <onsuccess>d4d10c95-6e9b-48f7-a4e1-43c9851db815</onsuccess>
+    <resource object="Email - POP3/SMTP" action="Configure" />
+  </stage>
+  <stage stageid="d4d10c95-6e9b-48f7-a4e1-43c9851db815" name="Email - POP3/SMTP::Send Message" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="-210" y="225" />
+    <inputs>
+      <input type="text" name="From" friendlyname="From" narrative="The email address of the sender." expr="[username]" />
+      <input type="text" name="To" friendlyname="To" narrative="The email address of the recipient. To address multiple recipients use the format &quot;john.smith@example.com, henry.jones@example.com&quot; OR &quot;John Smith &lt;john.smith@example.com&gt;, Henry Jones &lt;henry.jones@example.com&gt;&quot;." expr="&quot;saikiran1662003@gmail.com&quot;" />
+      <input type="text" name="Subject" friendlyname="Subject" narrative="The subject of the email." expr="&quot;currency converter doc&quot;" />
+      <input type="text" name="Body" friendlyname="Body" narrative="The body of the email." expr="&quot;hai please find this attachment&quot;" />
+      <input type="collection" name="Attachments" friendlyname="Attachments" narrative="A Collection containing a list of files to add to the email as attachments." expr="[attachment]" />
+      <input type="flag" name="BodyIsHTML" friendlyname="BodyIsHTML" narrative="Indicates if the body should be sent as HTML" expr="" />
+    </inputs>
+    <onsuccess>c39128d6-38ef-4251-8397-61da72e4a54f</onsuccess>
+    <resource object="Email - POP3/SMTP" action="Send Message" />
+  </stage>
+  <stage stageid="14e3f725-55ba-4fea-8b08-0fbaf5f8c159" name="attachment" type="Collection">
+    <display x="-210" y="270" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+    <collectioninfo>
+      <field name="Path" type="text" description="C:\Users\shailaja\Desktop\currency converter data.xlsx" />
+    </collectioninfo>
+  </stage>
+  <stage stageid="c39128d6-38ef-4251-8397-61da72e4a54f" name="Alert1" type="Alert">
+    <loginhibit onsuccess="true" />
+    <display x="-330" y="225" />
+    <onsuccess>31da296d-5783-4c8d-938e-e57278df2d46</onsuccess>
+    <alert expression="&quot;success&quot;" />
+  </stage>
+  <stage stageid="19250580-c6e3-4a9c-89f1-722bb2aed92a" name="Recover1" type="Recover">
+    <loginhibit />
+    <display x="-510" y="-60" />
+    <onsuccess>86a24c63-7763-4ed0-bf22-5cdef30ed943</onsuccess>
+  </stage>
+  <stage stageid="86a24c63-7763-4ed0-bf22-5cdef30ed943" name="Resume1" type="Resume">
+    <loginhibit />
+    <display x="-510" y="30" />
+    <onsuccess>29cb1a05-6448-491a-8cf1-4cd9c08089b9</onsuccess>
+  </stage>
+  <stage stageid="29cb1a05-6448-491a-8cf1-4cd9c08089b9" name="Alert2" type="Alert">
+    <loginhibit onsuccess="true" />
+    <display x="-510" y="120" />
+    <onsuccess>31da296d-5783-4c8d-938e-e57278df2d46</onsuccess>
+    <alert expression="&quot;exception&quot;" />
+  </stage>
+</process>
